@@ -3,6 +3,8 @@
 In soil constitutive model calibration, a good curve fit can easily hide the wrong soil parameters. How do you know what’s missing, and which lab test to run next? Resolving this typically requires specialized model expertise, which isn’t always easily available.
 Our new agentic AI workflow autonomously runs parameter calibration, diagnoses the hidden ambiguity, and tells you which test to run next based on embedded constitutive knowledge. 
 
+> Play the animations to see the result example.
+
 ![Round 1: calibration against one undrained test](results/case1/round1_calibration_progress.gif)
 
 *Round 1.* One undrained test is fitted well, yet several parameters settle away from their true values (dashed lines).
