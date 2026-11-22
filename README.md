@@ -1,5 +1,11 @@
 # Agentic calibrate–diagnose–suggest workflow for soil constitutive models
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-differentiable-ee4c2c.svg)](https://pytorch.org/)
+[![LangGraph](https://img.shields.io/badge/agent-LangGraph-1c3c3c.svg)](https://github.com/langchain-ai/langgraph)
+[![Paper](https://img.shields.io/badge/paper-Computers%20and%20Geotechnics-orange.svg)](https://doi.org/10.1016/j.compgeo.2026.108851)
+
 In soil constitutive model calibration, a good curve fit can easily hide the wrong soil parameters. How do you know what’s missing, and which lab test to run next? Resolving this typically requires specialized model expertise, which isn’t always easily available.
 Our new agentic AI workflow autonomously runs parameter calibration, diagnoses the hidden ambiguity, and tells you which test to run next based on embedded constitutive knowledge. 
 
