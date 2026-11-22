@@ -1,0 +1,66 @@
+{
+ "1": {
+  "template": "data/synthetic/case01_undrained_loose_p100_calibration.yaml",
+  "data": "data/synthetic/case01_undrained_loose_p100.tsv",
+  "round1_test": {
+   "drainage": "undrained",
+   "sigM0": 100.0,
+   "e0": 0.76
+  },
+  "round2_test": {
+   "drainage": "drained",
+   "sigM0": 300.0,
+   "e0": 0.7
+  },
+  "warm_start": true,
+  "proposal_reasoning": "The calibration diagnostics indicate some parameters are poorly identified. Here's the summary:\n\n**DIAGNOSTIC SUMMARY:**\n- Weak parameters and their contribution percentages:\n  - Hy: 29.65%\n  - lambda: 25.41%\n  - Gamma: 22.53%\n  - chi_tc: 22.32%\n\n**REASONING PER CONDITION:**\n- **sigM0 = 300 kPa:** Increasing the confining pressure will help separate the effects of Gamma and lambda by providing a different point on the critical state line (CSL), which is crucial for identifying these parameters.\n- **e0 = 0.700:** A denser sample will help in contrasting the psi values, which is essential for identifying Hy and chi_tc. This will also help in observing the dilatancy effects more clearly.\n- **drainage = drained:** Switching to a drained test will provide direct observations of volumetric strain, which is crucial for identifying chi_tc and improving the identifiability of Hy.\n\n**PROPOSED CONDITIONS:**\n- sigM0: 300 kPa (to better constrain Gamma and lambda)\n- e0: 0.700 (to improve identifiability of Hy and chi_tc)\n- drainage: drained (to directly observe volumetric strain and improve chi_tc identifiability)\n\nWould you like to proceed with generating a virtual test under these conditions?"
+ },
+ "3": {
+  "template": "data/synthetic/case03_undrained_dense_p100_calibration.yaml",
+  "data": "data/synthetic/case03_undrained_dense_p100.tsv",
+  "round1_test": {
+   "drainage": "undrained",
+   "sigM0": 100.0,
+   "e0": 0.598
+  },
+  "round2_test": {
+   "drainage": "undrained",
+   "sigM0": 300.0,
+   "e0": 0.7
+  },
+  "warm_start": true,
+  "proposal_reasoning": "**DIAGNOSTIC SUMMARY:**\nThe Fisher matrix diagnostics indicate that the parameters Gamma and lambda are the most poorly identified, contributing 40.00% and 34.09% respectively to the weakest direction. Hy also shows some weakness at 13.38%.\n\n**REASONING PER CONDITION:**\n- **sigM0 = 300 kPa:** The critical state line (CSL) is defined as ec = Gamma - lambda * ln(p). With only a single pressure point at 100 kPa, Gamma and lambda are poorly constrained because a single pressure point cannot pin the slope versus intercept of the CSL in ln(p) space. Adding a test at 300 kPa provides a second point on the CSL, helping to separate Gamma from lambda.\n- **e0 = 0.70:** The current test has e0 = 0.598, which is quite dense. A slightly looser sample (e0 = 0.70) will provide a different void ratio, which can help in better constraining Hy by creating a larger psi contrast. Since H = H0 - Hy * psi, two tests at different psi give two equations in H0, Hy, resolving the H0-Hy trade-off.\n- **drainage = undrained:** Keeping the drainage condition the same to maintain consistency in the type of data being compared.\n\n**PROPOSED CONDITIONS:**\n- e0: 0.70 (to provide a different void ratio and help constrain Hy)\n- sigM0: 300 kPa (to provide a second point on the CSL and help separate Gamma from lambda)\n- drainage: undrained (same as before for consistency)\n\nWould you like to proceed with generating a virtual test under these conditions?"
+ },
+ "6": {
+  "template": "data/synthetic/case06_drained_loose_p100_calibration.yaml",
+  "data": "data/synthetic/case06_drained_loose_p100.tsv",
+  "round1_test": {
+   "drainage": "drained",
+   "sigM0": 100.0,
+   "e0": 0.726
+  },
+  "round2_test": {
+   "drainage": "drained",
+   "sigM0": 300.0,
+   "e0": 0.7
+  },
+  "warm_start": true,
+  "proposal_reasoning": "Based on the diagnostics, the parameters are not well-identified. Here's the analysis and proposed next steps:\n\n**DIAGNOSTIC SUMMARY:**\n- Weak Parameters:\n  - Hy: 99.27% contribution to the weakest direction\n  - N: 0.39% contribution\n  - H0: 0.21% contribution\n\n**REASONING PER CONDITION:**\n- **e0 = 0.70:** The current test has e0 = 0.726 giving psi ~ -0.05. A denser sample (e0 = 0.70, psi ~ -0.15) creates a larger psi contrast. Since H = H0 - Hy * psi, two tests at different psi give two equations in H0, Hy -- resolving the H0-Hy trade-off.\n- **sigM0 = 300 kPa:** The CSL is ec = Gamma - lambda * ln(p). With only p = 100 kPa, Gamma and lambda are poorly constrained because a single pressure point cannot pin the slope vs intercept of the CSL in ln(p) space. Adding p = 300 kPa provides a second point on the CSL, separating Gamma from lambda.\n- **drainage = drained:** Same as before, to maintain consistency in observing volumetric strain (epsV), which directly affects dilatancy and helps constrain chi_tc.\n\n**PROPOSED CONDITIONS:**\n- e0: 0.70 (to create a larger psi contrast)\n- sigM0: 300 kPa (to provide a second point on the CSL)\n- drainage: drained (same as before)\n\nWould you like to proceed with generating a virtual test under these conditions?"
+ },
+ "7": {
+  "template": "data/synthetic/case07_drained_dense_p100_calibration.yaml",
+  "data": "data/synthetic/case07_drained_dense_p100.tsv",
+  "round1_test": {
+   "drainage": "drained",
+   "sigM0": 100.0,
+   "e0": 0.65
+  },
+  "round2_test": {
+   "drainage": "drained",
+   "sigM0": 300.0,
+   "e0": 0.7
+  },
+  "warm_start": true,
+  "proposal_reasoning": "Based on the diagnostics, the parameters are not well-identified. Here's the proposal for an additional test:\n\n**DIAGNOSTIC SUMMARY:**\n- Weak parameters:\n  - Hy: 92.84%\n  - N: 3.74%\n\n**REASONING PER CONDITION:**\n- **e0 = 0.70:** The current test has e0 = 0.65, which gives a certain psi value. A denser sample (e0 = 0.70) will create a larger psi contrast. Since H = H0 - Hy * psi, two tests at different psi values give two equations in H0 and Hy, resolving the H0-Hy trade-off.\n- **sigM0 = 300 kPa:** The CSL is defined as ec = Gamma - lambda * ln(p). With only p = 100 kPa, Gamma and lambda are poorly constrained because a single pressure point cannot pin the slope vs intercept of the CSL in ln(p) space. Adding p = 300 kPa provides a second point on the CSL, separating Gamma from lambda.\n- **drainage = drained:** Same as before, as the current drainage condition is appropriate for observing volumetric strain, which directly affects the dilatancy parameter chi_tc.\n\n**PROPOSED CONDITIONS:**\n- e0: 0.70 (to create a larger psi contrast)\n- sigM0: 300 kPa (to provide a second point on the CSL)\n- drainage: drained (same as before)"
+ }
+}

@@ -1,0 +1,136 @@
+NorSandConfig:
+# Template of the synthetic benchmark (generate_synthetic_data.py): bounds, solver settings and
+# the guess/truth ratio of each optimized parameter are copied into every scenario's config.
+  simulation:
+    MaxStrainForSim: 0.22
+    NumTheoPts: 3700
+    drainage: undrained  # choices: "drained", "undrained"
+    batch_size: 3  # Matches number of tests
+    # Available: eps1, epsV, p, q, e, pimg_over_p, pmax_over_p, psi, D, eta
+    output_keys:  # Keys output by model (for plotting)
+      - eps1
+      - q
+      - p
+      - epsV
+      - e
+      - ue
+
+  material_parameters:
+    csl:
+      Gamma: 0.5        # Perturbed from 0.95
+      lambda: 0.01      # Perturbed from 0.050
+
+    plasticity:
+      Mtc: 1.0          # Perturbed from 1.20
+      N: 0.35            # Perturbed from 0.30
+      chi_tc: 2.0        # Perturbed from 2.5 (ratio used for synthetic calib guesses)
+      H0: 500.0          # Perturbed from 250.0
+      Hy: 60.0           # Perturbed from 10.0
+
+    elasticity:
+      G_at_p0: 50000.0   # Perturbed from 10,000.0
+      Gexp: 0.0          # Correct value (0.0), not optimizing
+      nu: 0.20           # Correct value (0.20), not optimizing
+
+    soil_state:
+      e0: [0.810, 0.760, 0.720]
+      sigM0: [50.0, 100.0, 200.0]  # kPa
+      eta0: 0.0
+
+OptimizationSettings:
+  solver: lbfgsb  # choices: "adam", "lbfgsb"
+  learning_rate: 0.01
+  n_iterations: 100
+  loss_function: mse  # currently supported: "mse"
+  # Keys for loss computation (null = use all output_keys)
+  loss_keys: 
+    - q
+    - ue
+  # Optional: Jacobian/Fisher identifiability diagnostics (writes identifiability_diagnostics.pkl)
+  identifiability_diagnostics:
+    enabled: false
+  # log_dir and data_path are set per scenario by generate_synthetic_data.py
+  log_dir: logs/synthetic
+  save_interval: 1
+  data_path: data/synthetic/case01_undrained_loose_p100.tsv
+
+  # L-BFGS-B-specific hyperparameters
+  lbfgsb_settings:
+    maxfun: 100         # Max function evaluations (default: maxiter*1.5 which is too low)
+    ftol: 1.0e-12       # Function value convergence tolerance
+    gtol: 1.0e-7        # Gradient convergence tolerance
+
+  parameters:
+    csl:
+      Gamma: 
+        optimize: true
+        ground_truth: 0.95
+        bounds: [0.80, 1.10]
+        normalization: [0.80, 1.10]
+      lambda: 
+        optimize: true
+        ground_truth: 0.050
+        bounds: [0.01, 0.08]
+        normalization: [0.01, 0.08]
+
+    plasticity:
+      Mtc: 
+        optimize: true
+        ground_truth: 1.20
+        bounds: [0.9, 1.5]
+        normalization: [0.9, 1.5]
+      N: 
+        optimize: true
+        ground_truth: 0.30
+        bounds: [0.25, 0.40]
+        normalization: [0.25, 0.40]
+      chi_tc: 
+        optimize: true
+        ground_truth: 2.5
+        # Upper end supports drained loose synthetic cases (chi_tc up to ~14); undrained truth stays ~2.5.
+        bounds: [1.5, 14.0]
+        normalization: [1.5, 14.0]
+      H0: 
+        optimize: true
+        ground_truth: 250.0
+        bounds: [100.0, 1000.0]
+        normalization: [100.0, 1000.0]
+      Hy: 
+        optimize: true
+        ground_truth: 10.0
+        bounds: [5.0, 150.0]
+        normalization: [5.0, 150.0]
+
+    elasticity:
+      G_at_p0: 
+        optimize: true
+        ground_truth: 10000.0
+        bounds: [5000.0, 100000.0]
+        normalization: [5000.0, 100000.0]
+      Gexp: 
+        optimize: false
+        ground_truth: 0.0
+        bounds: [0.0, 0.7]
+        normalization: [0.0, 0.7]
+      nu: 
+        optimize: false
+        ground_truth: 0.20
+        bounds: [0.2, 0.35]
+        normalization: [0.2, 0.35]
+
+    soil_state:
+      e0: 
+        optimize: false
+        ground_truth: [0.810, 0.760, 0.720]
+        bounds: [0.5, 1.2]
+        normalization: [0.5, 1.2]
+      sigM0: 
+        optimize: false
+        ground_truth: [50.0, 100.0, 200.0]
+        bounds: [80.0, 200.0]
+        normalization: [80.0, 200.0]
+      eta0: 
+        optimize: false
+        ground_truth: 0.0
+        bounds: [0.0, 0.25]
+        normalization: [0.0, 0.25]

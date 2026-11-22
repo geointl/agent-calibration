@@ -1,0 +1,17 @@
+Triaxial Test Report - Sample TX-001
+
+Test Type: Consolidated undrained (CU) Triaxial Compression
+
+Sample Preparation:
+- Soil type: Loose sand
+- Initial void ratio: approximately 0.760
+- Relative density: Loose
+
+Test Conditions:
+- Consolidation pressure: 100 kPa (isotropic)
+- Drainage during shear: undrained
+- Loading rate: Strain controlled at 0.1%/min
+
+The sample was sheared to approximately 22% axial strain.
+Measurements include deviatoric stress (q), mean effective stress (p),
+and excess pore water pressure (ue).

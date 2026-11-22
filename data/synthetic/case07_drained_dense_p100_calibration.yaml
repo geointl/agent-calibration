@@ -1,0 +1,110 @@
+NorSandConfig:
+  simulation:
+    MaxStrainForSim: 0.22
+    NumTheoPts: 3700
+    drainage: drained
+    batch_size: 1
+    output_keys: [eps1, q, p, epsV, e, ue]
+  material_parameters:
+    csl:
+      Gamma: 0.49999999999999994
+      lambda: 0.01
+    plasticity:
+      Mtc: 1.0
+      N: 0.35000000000000003
+      chi_tc: 6.4
+      H0: 200.0
+      Hy: 36.0
+    elasticity:
+      G_at_p0: 50000.0
+      Gexp: 0.0
+      nu: 0.2
+    soil_state:
+      e0: 0.65
+      sigM0: 100.0
+      eta0: 0.0
+OptimizationSettings:
+  solver: lbfgsb
+  learning_rate: 0.01
+  n_iterations: 100
+  loss_function: mse
+  loss_keys: [q, epsV]
+  identifiability_diagnostics:
+    enabled: false
+  log_dir: logs/synthetic_case07_drained_dense_p100
+  save_interval: 1
+  data_path: data/synthetic/case07_drained_dense_p100.tsv
+  lbfgsb_settings:
+    maxfun: 100
+    ftol: 1.0e-12
+    gtol: 1.0e-07
+  parameters:
+    csl:
+      Gamma:
+        optimize: true
+        ground_truth: 0.95
+        bounds: [0.8, 1.1]
+        normalization: [0.8, 1.1]
+      lambda:
+        optimize: true
+        ground_truth: 0.05
+        bounds: [0.01, 0.08]
+        normalization: [0.01, 0.08]
+    plasticity:
+      Mtc:
+        optimize: true
+        ground_truth: 1.2
+        bounds: [0.9, 1.5]
+        normalization: [0.9, 1.5]
+      N:
+        optimize: true
+        ground_truth: 0.3
+        bounds: [0.25, 0.4]
+        normalization: [0.25, 0.4]
+      chi_tc:
+        optimize: true
+        ground_truth: 8.0
+        bounds: [1.5, 14.0]
+        normalization: [1.5, 14.0]
+      H0:
+        optimize: true
+        ground_truth: 100.0
+        bounds: [100.0, 1000.0]
+        normalization: [100.0, 1000.0]
+      Hy:
+        optimize: true
+        ground_truth: 6.0
+        bounds: [5.0, 150.0]
+        normalization: [5.0, 150.0]
+    elasticity:
+      G_at_p0:
+        optimize: true
+        ground_truth: 10000.0
+        bounds: [5000.0, 100000.0]
+        normalization: [5000.0, 100000.0]
+      Gexp:
+        optimize: false
+        ground_truth: 0.0
+        bounds: [0.0, 0.7]
+        normalization: [0.0, 0.7]
+      nu:
+        optimize: false
+        ground_truth: 0.2
+        bounds: [0.2, 0.35]
+        normalization: [0.2, 0.35]
+    soil_state:
+      e0:
+        optimize: false
+        ground_truth: 0.65
+        bounds: [0.5, 1.2]
+        normalization: [0.5, 1.2]
+      sigM0:
+        optimize: false
+        ground_truth: 100.0
+        bounds: [80.0, 200.0]
+        normalization: [80.0, 200.0]
+      eta0:
+        optimize: false
+        ground_truth: 0.0
+        bounds: [0.0, 0.25]
+        normalization: [0.0, 0.25]

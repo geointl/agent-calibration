@@ -1,0 +1,11 @@
+
+=== MEASURED DATA (overrides the workflow above where they differ) ===
+
+The data are laboratory measurements, so generate_virtual_test is not
+available. In step 8, after the human approves a proposed test, use ask_human
+to request the report or data file of that test once it has been performed,
+then continue with parse_report and write_config as before.
+
+The strain-window rule above does not apply: write_config sets the simulation
+window from the measured curves, and tests may have different strain ranges
+and numbers of points.

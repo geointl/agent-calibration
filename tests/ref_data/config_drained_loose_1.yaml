@@ -1,0 +1,27 @@
+simulation:
+  MaxStrainForSim: 0.22
+  NumTheoPts: 3700
+  drainage: drained   # choices: "drained", "undrained"
+  batch_size: 1         # None for scalar simulation, int for batched simulation
+
+material_parameters:
+  csl:
+    Gamma: 0.85
+    lambda: 0.020
+
+  plasticity:
+    Mtc: 1.2
+    N: 0.30
+    chi_tc: 4.0
+    H0: 300
+    Hy: 10
+
+  elasticity:
+    G_at_p0: 10000.0      # kPa
+    Gexp: 0.0
+    nu: 0.3
+
+  soil_state:
+    e0: 0.767896596
+    sigM0: 100.0          # kPa
+    eta0: 0.0

@@ -1,0 +1,10 @@
+
+=== SENSITIVITY SCREEN ===
+
+Before you call ask_human with a new test proposal (step 7), call screen_test
+with the latest calibration log directory and the proposed e0, sigM0, and
+drainage.
+- PROCEED: present the proposal as usual and include the screen result.
+- STOP: do not propose this test. Use ask_human to report the screen result
+  and the weakly observable parameters, and end the loop unless the human
+  requests otherwise.
